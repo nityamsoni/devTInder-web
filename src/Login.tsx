@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addUser } from './utils/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +25,14 @@ const Login: React.FC = () => {
       { withCredentials: true }
     );
 
-      console.log(res.data);
+  console.log(res.data);
+  // backend may return the user directly or wrapped (e.g. { user, token })
+  const userPayload = res.data?.user ?? res.data;
+  dispatch(addUser(userPayload));
+
       alert("Login successful!");
       // you can navigate using react-router: navigate('/dashboard')
+      navigate('/feed');
     } catch (err: any) {
       console.error(err);
       setError(err.response?.data?.message || "Login failed. Try again!");
