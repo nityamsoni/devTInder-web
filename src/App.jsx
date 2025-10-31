@@ -5,7 +5,7 @@ import Body from './Body.jsx';
 import Login from './Login.jsx';
 import Profile from './Profile.jsx';
 import { Provider } from 'react-redux';
-import Feed from './Feed.jsx';
+import Feed from './feed.jsx';
 import appStore from './utils/appStore.js';
 
 function App() {
