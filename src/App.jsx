@@ -4,13 +4,17 @@ import Navbar from './Navbar.jsx';
 import Body from './Body.jsx';
 import Login from './Login.jsx';
 import Profile from './Profile.jsx';
+import { Provider } from 'react-redux';
+import Feed from './feed.jsx';
+import appStore from './utils/appStore.js';
 
 function App() {
 
   return (
     <>
 
-    <BrowserRouter basename='/'>
+    <Provider store={appStore}>
+      <BrowserRouter basename='/'>
       <Routes>
           {/* <Route path='/' element={<h1 className="text-3xl font-bold underline"> <Navbar /> </h1>} />
 
@@ -21,6 +25,7 @@ function App() {
            <Navbar />
           Test page</h1>} /> */}
           <Route path='/' element={<Body />} >
+           <Route path='/feed' element={<Feed />} />
             <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
 
@@ -29,6 +34,7 @@ function App() {
       </Routes>
 
       </BrowserRouter>
+    </Provider>
       {/**/}
  
     </>
