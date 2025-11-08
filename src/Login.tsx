@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -22,7 +23,7 @@ const Login: React.FC = () => {
 
       console.log(res.data);
       alert("Login successful!");
-      // you can navigate using react-router: navigate('/dashboard')
+      navigate('/profile');
     } catch (err: any) {
       console.error(err);
       setError(err.response?.data?.message || "Login failed. Try again!");
